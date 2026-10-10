@@ -6,7 +6,9 @@ These sources inform the workflow; they are not mandates to install frameworks o
 - [GitHub Copilot: add agent skills](https://docs.github.com/en/copilot/how-tos/copilot-cli/customize-copilot/add-skills) — project and personal skill locations, discovery, and invocation.
 - [GitHub CLI: publish agent skills](https://docs.github.com/en/enterprise-cloud@latest/copilot/how-tos/copilot-on-github/customize-copilot/customize-cloud-agent/add-skills#publishing-skills) — validate repositories with `gh skill publish --dry-run` before publishing.
 - [Android: build instrumented tests](https://developer.android.com/training/testing/instrumented-tests) — instrumentation source sets and AndroidX Test setup.
+- [Android CLI: manage emulators](https://developer.android.com/studio/run/emulator-commandline) — use `android emulator` to create, list, start, and stop AVDs.
 - [Android: instrumented test stability](https://developer.android.com/training/testing/instrumented-tests/stability) — synchronization, device setup, and flaky-test diagnosis.
+- [Android: run tests from the command line](https://developer.android.com/studio/test/command-line) — use the project’s Gradle instrumentation tasks to execute tests.
 - [Android Testing Samples](https://github.com/android/testing-samples) — focused Espresso examples for idling resources, intents, RecyclerViews, fragments, and UI Automator.
 - [Now in Android testing guidance](https://github.com/android/nowinandroid#testing) — variant-aware tests, hermetic demo data, fakes, and assertions on state rather than mock call choreography.
 - [Android Architecture Samples test specification](https://github.com/android/architecture-samples/wiki/To-do-app-specification) — compare isolated mock-backed device tests with network-backed variants.

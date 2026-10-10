@@ -12,7 +12,7 @@ Own the selected slice through completion. Work incrementally: one existing test
 ## 1. Establish scope and protect the checkout
 
 1. Read repository guidance (`AGENTS.md`, contribution docs, test docs), inspect `git status`, and preserve unrelated user changes. Never revert or overwrite pre-existing work.
-2. Map modules, variants/flavors, test source sets, instrumentation runner, test libraries, app architecture, DI, API clients, persistence, and CI test commands. Inspect the relevant production behavior before changing a test.
+2. Map modules, variants/flavors, test source sets, instrumentation runner, test libraries, app architecture, DI, API clients, persistence, and CI test commands. Inspect the relevant production behavior before changing a test. Check whether the Android CLI is installed (`command -v android`) and inspect its current help before using it.
 3. Inventory every target `androidTest` class and test. Record its behavior contract, setup, external dependencies, current status, ignored tests, fixed waits, broad exception catches, weak assertions, and required device/API level.
 4. If the request names a broad area, select the first bounded test class or cohesive behavior slice that best matches the user's priority. State the selected slice and leave unrelated tests for later invocations.
 
@@ -43,10 +43,14 @@ If the agent host provides a native persistent-goal feature, create or continue 
 ## 4. Run and diagnose
 
 1. Determine exact task names from project variant configuration and test reports; do not guess that every flavor is supported. Use the repository's CI task when appropriate.
-2. Check `adb devices` or the project's managed-device configuration before claiming device execution. Run the focused class/method first; run the full target suite only when appropriate to this slice or requested by the user.
-3. On failure, classify it as compile/configuration, assertion/behavior, synchronization/flakiness, device/environment, or external dependency. Read XML/HTML test reports and relevant logcat. Fix application/test defects; don't mask environmental failures as success.
-4. If a failure appears flaky, reproduce it and remove the race. Retries are diagnostic only; repeated pass-on-retry is not a quality fix.
-5. After test changes, run the smallest relevant build/lint/format checks that the repository requires. Don't add unrelated tests or dependency upgrades.
+2. Use the Android CLI to manage emulator lifecycle when it is available: inspect `android emulator --help`, list devices with `android emulator list`, and start a compatible existing AVD with `android emulator start <device-name>`. The CLI waits for startup to finish. If no suitable AVD exists, inspect `android emulator create --help` and create a new named AVD only when the required SDK image is already available; do not remove or reconfigure existing AVDs. Ask before installing missing SDK packages or system images.
+3. Confirm readiness with `android info` or `adb devices`. Use the project’s exact Gradle instrumentation task to build and run tests; `android run` launches an app and is not an instrumentation-test runner. Run the focused class/method first, then widen only when the slice or risk warrants it.
+4. Stop only an emulator started for this run, using `android emulator stop <device-serial-number>`. Leave pre-existing user devices and emulators running.
+5. On failure, classify it as compile/configuration, assertion/behavior, synchronization/flakiness, device/environment, or external dependency. Read XML/HTML test reports and relevant logcat. Fix application/test defects; don't mask environmental failures as success.
+6. If a failure appears flaky, reproduce it and remove the race. Retries are diagnostic only; repeated pass-on-retry is not a quality fix.
+7. After test changes, run the smallest relevant build/lint/format checks that the repository requires. Don't add unrelated tests or dependency upgrades.
+
+If the Android CLI is unavailable, report that explicitly. Continue independent work and use a repository-provided CI or Gradle-managed-device workflow only as a documented fallback; do not claim Android CLI verification.
 
 ## 5. Close the goal with evidence
 

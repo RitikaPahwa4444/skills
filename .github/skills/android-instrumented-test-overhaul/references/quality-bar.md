@@ -6,7 +6,7 @@
 - Every changed or added test has a meaningful behavior-facing assertion and deterministic setup and cleanup.
 - No changed test depends on arbitrary sleeps, swallowed failures, a production service, or a live write side effect.
 - Repair stale tests in scope. For each test that must remain ignored, state the reason and next action; ignored tests do not count as passing coverage.
-- Compile the target test APK and pass each changed test on a selected emulator or device. Run a broader suite only when the change or risk warrants it. Without device execution, report the blocker and keep the goal open.
+- Compile the target test APK and pass each changed test on a selected emulator or device. Use Android CLI to list/start/stop the emulator when available; record the commands and device/API level. Run a broader suite only when the change or risk warrants it. Without device execution, report the blocker and keep the goal open.
 - Fix relevant failures at their cause. A pass only after retries is not sufficient.
 - Report exact commands, variant, device/API level, result counts when available, and remaining risks. Do not imply that untouched tests were verified.
 
