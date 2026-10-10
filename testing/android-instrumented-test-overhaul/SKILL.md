@@ -1,6 +1,8 @@
 ---
 name: android-instrumented-test-overhaul
-description: Use when one Android instrumented-test class or cohesive behavior slice has drifted, is flaky or disabled, or needs systematic repair and coverage expansion. Creates and pursues a persistent goal for that bounded slice, then assesses, fixes, adds, and runs device tests until a measurable quality bar is met.
+description: Repair, stabilize, or expand Android instrumented tests one class or cohesive behavior slice at a time. Use when tests have drifted, are flaky or disabled, or important Android-dependent behavior lacks coverage. Inspect the target repository, make focused changes, and run device tests to a measurable quality bar.
+license: Apache-2.0
+compatibility: Agent Skills-compatible host; Android SDK, Gradle project, and emulator or connected Android device are needed for instrumented test execution.
 ---
 
 # Android Instrumented Test Overhaul
@@ -24,7 +26,7 @@ Always start or continue a goal for the selected slice:
 4. Keep the goal active while useful work remains. Mark it complete only when all criteria for the selected slice are evidenced. Do not expand the goal to unrelated tests. Mark it blocked only after the same external blocker has persisted for at least three consecutive goal turns and meaningful progress requires an external-state change or user input. Report a single failed run as a blocker diagnosis, not goal completion.
 5. If a device, SDK, permissions, or approval is missing, continue independent work within the selected slice and provide the exact command/setup needed. Never claim device verification that did not happen.
 
-If the client has a native persistent-goal feature, use it (for Codex, create or continue the active goal with the goal tools). In clients without that feature, state the slice goal and completion criteria in the conversation and continue that same conversation through implementation and verification; keep a concise progress checklist in the response when handing work back between turns. Do not claim native `/goal` integration in clients that do not provide it.
+If the agent host provides a native persistent-goal feature, create or continue a goal for this slice and keep pursuing it until the completion criteria are met or a real blocker is established. Otherwise, state the goal and criteria in the conversation, continue through implementation and verification, and keep a concise progress checklist when handing work back between turns. Do not claim native goal integration in hosts that do not provide it.
 
 ## 3. Repair and expand tests
 
